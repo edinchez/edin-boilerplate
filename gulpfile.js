@@ -22,7 +22,7 @@ var gulp        = require('gulp'),
 gulp.task('pug:watch', function() {
   var LOCALS = {};
 
-  gulp.src(['views/**/*.pug', '!views/_layout/**/*', '!views/_partials/**/*'])
+  return gulp.src(['views/**/*.pug', '!views/_layout/**/*', '!views/_partials/**/*'])
     .pipe(plumber())
     .pipe(pug({
       locals: LOCALS,
@@ -36,7 +36,7 @@ gulp.task('pug:watch', function() {
 gulp.task('pug:build', function() {
   var LOCALS = {};
 
-  gulp.src(['views/**/*.pug', '!views/_layout/**/*', '!views/_partials/**/*'])
+  return gulp.src(['views/**/*.pug', '!views/_layout/**/*', '!views/_partials/**/*'])
     .pipe(pug({
       locals: LOCALS,
       pretty: false
@@ -51,7 +51,7 @@ gulp.task('pug:build', function() {
 // Compile Stylus CSS
 
 gulp.task('stylus:watch', function () {
-  gulp.src('assets/styles/master.styl')
+  return gulp.src('assets/styles/master.styl')
     .pipe(plumber())
     .pipe(stylus({
       compress: false,
@@ -62,7 +62,7 @@ gulp.task('stylus:watch', function () {
 });
 
 gulp.task('stylus:build', function () {
-  gulp.src('assets/styles/master.styl')
+  return gulp.src('assets/styles/master.styl')
     .pipe(stylus({
       compress: true,
       use: [jeet(), nib(), rupture()]
@@ -81,7 +81,7 @@ var jsFiles = [
 ];
 
 gulp.task('js:watch', function() {
-  gulp.src(jsFiles)
+  return gulp.src(jsFiles)
     .pipe(plumber())
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest('build/js'))
@@ -89,7 +89,7 @@ gulp.task('js:watch', function() {
 });
 
 gulp.task('js:build', function() {
-  gulp.src(jsFiles)
+  return gulp.src(jsFiles)
     .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest('build/js'));
@@ -101,7 +101,7 @@ gulp.task('js:build', function() {
 // Optimize all images
 
 gulp.task('imagemin', function() {
-  gulp.src('assets/images/**/*')
+  return gulp.src('assets/images/**/*')
     .pipe(plumber())
     .pipe(imagemin())
     .pipe(gulp.dest('build/images'))
@@ -113,7 +113,7 @@ gulp.task('imagemin', function() {
 // Copy fonts
 
 gulp.task('copy-fonts', function() {
-  gulp.src('assets/fonts/**/*')
+  return gulp.src('assets/fonts/**/*')
     .pipe(plumber())
     .pipe(gulp.dest('build/fonts/'))
 });
